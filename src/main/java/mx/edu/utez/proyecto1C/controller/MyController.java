@@ -47,11 +47,40 @@ public class MyController {
                 .body(payload);
     }
 
-    public ResponseEntity<RequestBodyDTO> fibonacci(@RequestBody @Valid RequestBodyDTO payload){
-        System.out.println(payload.getEdad());
-        System.out.println(payload.getNombre());
-        return  ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(payload);
+
+    //EJERCICIO DE FIZZBUZZ
+    @GetMapping("/fizzbuzz/{n}")
+    public String FizzBuzz(@PathVariable int n ){
+
+        for (int i=1;i<=n;i++) {
+            if ((i % 3 == 0) && (i % 5 == 0)) {
+                System.out.println("FizzBuzz");
+            }else if (i%3==0){
+                System.out.println("Fizz");
+            }else if (i%5==0){
+                System.out.println("Buzz");
+            }else {
+                System.out.println(i);
+            }
+        }
+
+        return "Martinez Peralta Edwin Sebastian";
+    }
+
+
+    //EJERCICIO DE FIBONACCI
+    @GetMapping("/fibonacci/{n}")
+    public String Fibonacci(@PathVariable int n){
+        int a=0,b=1;
+        for (int i=0;i<n;i++){
+            System.out.println(a);
+            int suma = a+b;
+            a=b;
+            b=suma;
+
+        }
+
+        return "Martinez Peralta Edwin Sebastian";
+
     }
 }
