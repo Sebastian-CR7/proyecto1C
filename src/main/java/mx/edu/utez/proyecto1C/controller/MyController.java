@@ -2,6 +2,8 @@ package mx.edu.utez.proyecto1C.controller;
 
 import jakarta.validation.Valid;
 import mx.edu.utez.proyecto1C.controller.dto.RequestBodyDTO;
+import mx.edu.utez.proyecto1C.controller.dto.RequestCalculadoraDTO;
+import mx.edu.utez.proyecto1C.service.MyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin ({"*"})//  TODOS LOS ORIGENES
 @RequestMapping("/my-services")
 public class MyController {
+
+    private  final MyService service;
+
+    public MyController (MyService service) {
+        this.service=service;
+    }
 
     @GetMapping
     public String miPrimerServicio(){
@@ -79,8 +87,13 @@ public class MyController {
             b=suma;
 
         }
-
         return "Martinez Peralta Edwin Sebastian";
 
     }
+
+    @PostMapping("/calculadora")
+    public double calculadora(@RequestBody @Valid RequestCalculadoraDTO payload ){
+        return service.calculadora(payload);
+    }
+
 }
