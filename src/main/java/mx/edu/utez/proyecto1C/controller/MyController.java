@@ -1,8 +1,10 @@
 package mx.edu.utez.proyecto1C.controller;
 
 import jakarta.validation.Valid;
+import mx.edu.utez.proyecto1C.controller.dto.CotizadorEnviosDTO;
 import mx.edu.utez.proyecto1C.controller.dto.RequestBodyDTO;
 import mx.edu.utez.proyecto1C.controller.dto.RequestCalculadoraDTO;
+import mx.edu.utez.proyecto1C.service.EnviosService;
 import mx.edu.utez.proyecto1C.service.MyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class MyController {
 
     private  final MyService service;
+    private final EnviosService enviosService;
 
-    public MyController (MyService service) {
+    public MyController (MyService service, EnviosService enviosService) {
         this.service=service;
+        this.enviosService = enviosService;
     }
 
     @GetMapping
@@ -94,6 +98,12 @@ public class MyController {
     @PostMapping("/calculadora")
     public double calculadora(@RequestBody @Valid RequestCalculadoraDTO payload ){
         return service.calculadora(payload);
+    }
+
+    @PostMapping("/envios")
+    public ResponseEntity<Double> envios(@RequestBody @Valid CotizadorEnviosDTO payload){
+        Double costoT= enviosService.envios(payload);
+        return ResponseEntity.ok(costoT);
     }
 
 }
