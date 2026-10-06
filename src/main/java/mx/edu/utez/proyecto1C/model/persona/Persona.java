@@ -23,9 +23,10 @@ public class Persona {
     private String primerApellido;
     private String segundoApellido;
 
+
     private Data fechaNacimiento;
     private String correo;
-    private String apodos;
+    private String curp;
 
 
 }
