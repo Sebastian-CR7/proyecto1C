@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mx.edu.utez.proyecto1C.model.cursos.Curso;
 
-import javax.xml.crypto.Data;
+import java.util.List;
+
 
 @Entity
 @Table(name = "personas")
@@ -23,10 +25,20 @@ public class Persona {
     private String primerApellido;
     private String segundoApellido;
 
+    @Temporal(TemporalType.DATE)
 
-    private Data fechaNacimiento;
+    private String fechaNacimiento;
     private String correo;
     private String curp;
 
+/*
+    @ManyToMany
+    @JoinTable(
+            name = "personas_cursos",
+            joinColumns = @JoinColumn(name = "persona_id"),
+            inverseJoinColumns = @JoinColumn(name = "cursos_id")
+    )
+    private List<Curso> cursos;
+*/
 
 }
